@@ -41,6 +41,8 @@ app.get('/user/:id?', function (req, res, next) {
   res.render('user.ejs', {user: username});
 });
 
+module.exports = app;
+/*
 var server = app.listen(process.env.PORT || 5000, function () {
 
   var host = server.address().address;
@@ -48,4 +50,4 @@ var server = app.listen(process.env.PORT || 5000, function () {
 
   console.log('Example app listening at http://%s:%s', host, port)
 
-});
+});*/
