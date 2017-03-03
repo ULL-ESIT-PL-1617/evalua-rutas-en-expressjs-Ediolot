@@ -37,13 +37,14 @@ app.use('/user/:id', function (req, res, next) {
 
 app.get('/user/:id?', function (req, res, next) {
   console.log(req.params);
-  res.send('Hola '+(req.params.id || 'unknown' ));
+  var username = req.params.id || 'unknown';
+  res.render('user.ejs', {user: username});
 });
 
 var server = app.listen(3000, function () {
 
-  var host = server.address().address
-  var port = server.address().port
+  var host = server.address().address;
+  var port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port)
 
