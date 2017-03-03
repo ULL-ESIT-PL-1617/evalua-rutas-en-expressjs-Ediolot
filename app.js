@@ -25,25 +25,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use('/user/:id', function (req, res, next) {
+  console.log('Request Type:', req.method);   // GET
+  console.log('Request Path:', req.path);     // /
+  console.log('Request Host:', req.hostname); // localhost
+  console.log('Request IP:', req.ip);         // 127.0.0.1
+  console.log('Request cookies:', req.cookies); // { request_method: 'GET', ...
+  console.log('req.params.id: '+(req.params.id)); // req.params.id: casiano
+  next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.get('/user/:id?', function (req, res, next) {
+  console.log(req.params);
+  res.send('Hola '+(req.params.id || 'unknown' ));
 });
-
-module.exports = app;
 
 var server = app.listen(3000, function () {
 
